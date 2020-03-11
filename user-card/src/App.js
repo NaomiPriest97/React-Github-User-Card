@@ -3,6 +3,7 @@ import './App.css';
 import axios from "axios";
 
 
+
 function searchingFor(userText){
   return function(x){
     return x.login.toLowerCase().includes(userText.toLowerCase()) || !userText;
@@ -27,19 +28,15 @@ class App extends React.Component {
 
   componentDidMount() {
     
-      axios
-      .get("https://api.github.com/users/NaomiPriest97/followers")
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-        
-          users: res.data
-        });
-      })
-      .catch(err => console.log(err.message));
-
-    
-      
+    axios
+    .get("https://api.github.com/users/NaomiPriest97/followers")
+    .then(res => {
+      console.log(res.data);
+      this.setState({
+        users: res.data
+      });
+    })
+    .catch(err => console.log(err.message));  
   }
 
   
@@ -48,14 +45,11 @@ class App extends React.Component {
   render() {
      const {users, userText} = this.state;
     return (
-     
       <div className="App">
-        
           <h1>Naomi Ruemmely-Torres</h1>
+          
           <input placeholder="Search for followers" value={userText} onChange={this.handleChanges} />
 
-          
-          
           <div className="users">
             {users.filter(searchingFor(userText)).map((user, index) => {
               return (
